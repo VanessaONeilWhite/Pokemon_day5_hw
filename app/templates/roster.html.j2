@@ -1,0 +1,36 @@
+{% extends 'base.html.j2' %}
+
+{% block title %}
+Pokemon Roster
+{% endblock %}
+
+
+{% block content %}
+
+{% for poke in pokemon %}
+    {% if poke.user_id == current_user.id %}
+    <div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+            <div class="col-md-4">            
+                <img src="{{ poke.get_image_url() }}" class="img-fluid rounded-start" alt="avatar">            
+            </div>
+            <div class="col-md-6">
+                <div class="card-body">
+                    <h5 class="card-title">{{poke.poke_name | title}}</h5>
+                    <p class="card-text">Attack Base Stat: {{poke.attack_base_stat}}</p>
+                    <p class="card-text">Defense Base Stat: {{poke.defense_base_stat}}</p>
+                    <p class="card-text">Ability Name: {{poke.ability_name}}</p>
+                    <p class="card-text">Base Experience: {{poke.base_experience}}</p>
+
+                </div>
+            </div>
+            <div class="col-md-2" class="row align-items-center">    
+                <a href="/release_poke/{{poke_name}}" class="btn btn-danger">Remove</a>
+            </div>
+    </div>
+    </div>
+    {% endif %}
+{% endfor %}
+
+
+{% endblock %}
